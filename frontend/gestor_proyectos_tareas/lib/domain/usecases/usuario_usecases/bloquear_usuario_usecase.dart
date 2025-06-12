@@ -4,7 +4,7 @@ class BloquearUsuarioUseCase {
   final UsuarioRepository repository;
   BloquearUsuarioUseCase(this.repository);
 
-  Future<void> call(int usuarioId) {
-    return repository.bloquearUsuario(usuarioId);
+  Future<void> call(int usuarioId, bool bloquear) {
+    return repository.bloquearUsuario(usuarioId, bloquear);
   }
 }

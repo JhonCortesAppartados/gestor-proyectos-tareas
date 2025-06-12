@@ -41,7 +41,6 @@ class ProyectoRepositoryImpl implements ProyectoRepository {
     fechaInicio: proyecto.fechaInicio,
     fechaFin: proyecto.fechaFin,
     creadoPor: proyecto.creadoPor,
-    usuariosAsignados: proyecto.usuariosAsignados,
   );
 
     final response = await http.post(
@@ -51,7 +50,7 @@ class ProyectoRepositoryImpl implements ProyectoRepository {
         if (authProvider?.jwtToken != null)
           'Authorization': 'Bearer ${authProvider!.jwtToken}',
       },
-      body: jsonEncode(proyectoModel.toCreateJson()),
+      body: jsonEncode(proyectoModel.toJson()),
     );
     if (response.statusCode == 200) {
       return ProyectoModel.fromJson(jsonDecode(response.body));

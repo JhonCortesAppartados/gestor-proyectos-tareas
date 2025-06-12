@@ -5,6 +5,7 @@ class UsuarioModel extends Usuario {
     required int id,
     required String nombre,
     required String correo,
+    String? password,
     required bool estaBloqueado,
     required int rol,
     DateTime? creadoEn,
@@ -12,6 +13,7 @@ class UsuarioModel extends Usuario {
          id: id,
          nombre: nombre,
          correo: correo,
+         password: password,
          estaBloqueado: estaBloqueado,
          rol: rol,
          creadoEn: creadoEn,
@@ -34,6 +36,7 @@ class UsuarioModel extends Usuario {
     'correo': correo,
     'esta_bloqueado': estaBloqueado,
     'rol_id': rol,
+    if(password != null) 'password': password,
     if(creadoEn != null)
       'creado_en': creadoEn!.toIso8601String(),
   };

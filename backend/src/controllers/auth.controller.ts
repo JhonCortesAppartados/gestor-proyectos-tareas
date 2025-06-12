@@ -3,16 +3,21 @@ import { UsuarioRepositoryImpl } from "../data/repositories/usuario.repository.i
 import { compare } from "bcrypt";
 import {sign} from "../shared/libs/jwt";
 
+//Se utiliza express como framework, para poder construir las peticiones HTTP.
+
 const usuarioRepo = new UsuarioRepositoryImpl();
 
+// Se crea el metodo del controlador del login para veirifcar la información que se recibe.
 export const loginUsuario = async (req: Request, res: Response) => {
     const { correo, password } = req.body;
     
+    //Si no recibe el correo o la contraseña da el aviso de que los datos son requeridos.
     if (!correo || !password) {
         res.status(400).json({ message: "Correo y contraseña son requeridos" });
         return;
     }
     
+    //Validaciones que se hacen con la información que se recibe.
     try {
         const usuario = await usuarioRepo.findByCorreo(correo);
         if(!usuario) {

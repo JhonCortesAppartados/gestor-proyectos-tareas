@@ -8,7 +8,6 @@ class ProyectoModel extends Proyecto {
     required DateTime fechaInicio,
     DateTime? fechaFin,
     required int creadoPor,
-    List<int>? usuariosAsignados,
   }) : super(
          id: id,
          titulo: titulo,
@@ -16,7 +15,6 @@ class ProyectoModel extends Proyecto {
          fechaInicio: fechaInicio,
          fechaFin: fechaFin,
          creadoPor: creadoPor,
-         usuariosAsignados: usuariosAsignados,
        );
 
   factory ProyectoModel.fromJson(Map<String, dynamic> json) => ProyectoModel(
@@ -27,13 +25,9 @@ class ProyectoModel extends Proyecto {
     fechaFin:
         json['fecha_fin'] != null ? DateTime.parse(json['fecha_fin']) : null,
     creadoPor: json['creado_por'],
-    usuariosAsignados:
-        json['usuarios_asignados'] != null
-            ? List<int>.from(json['usuarios_asignados'])
-            : null,
   );
 
-  Map<String, dynamic> toCreateJson() => {
+  Map<String, dynamic> toJson() => {
     'titulo': titulo,
     'descripcion': descripcion,
     'fecha_inicio': fechaInicio.toIso8601String(),

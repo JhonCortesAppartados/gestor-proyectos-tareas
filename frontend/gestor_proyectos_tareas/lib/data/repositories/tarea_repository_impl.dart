@@ -29,7 +29,7 @@ class TareaRepositoryImpl implements TareaRepository {
     if (response.statusCode == 200) {
       return TareaModel.fromJson(jsonDecode(response.body));
     }
-throw Exception('Error al actualizar tarea');
+    throw Exception('Error al actualizar tarea');
   }
 
   @override
@@ -46,7 +46,7 @@ throw Exception('Error al actualizar tarea');
     if (response.statusCode == 200) {
       return TareaModel.fromJson(jsonDecode(response.body));
     }
-  throw Exception('Error al crear tarea');
+    throw Exception('Error al crear tarea');
   }
 
   @override

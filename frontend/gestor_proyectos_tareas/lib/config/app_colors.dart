@@ -9,4 +9,6 @@ class AppColors{
   static const Color error = Color(0xFFD32F2F);
   static const Color borrar = Color(0xFFE61515);
   static const Color edit = Color(0xFF2196F3);
+  static const Color habilitar = Color(0xFF4CAF50);
+  static const Color desabilitar = Color(0xFFE91E63);
 }

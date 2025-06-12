@@ -5,7 +5,6 @@ class Proyecto {
   final DateTime fechaInicio;
   final DateTime? fechaFin;
   final int creadoPor;
-  final List<int>? usuariosAsignados;
 
   Proyecto({
     required this.id,
@@ -14,7 +13,6 @@ class Proyecto {
     required this.fechaInicio,
     this.fechaFin,
     required this.creadoPor,
-    this.usuariosAsignados,
   });
 
 

@@ -25,11 +25,16 @@ class UsuarioProvider extends ChangeNotifier{
 
   Future<void> registrarUsuario(Usuario usuario) async {
     await registrarUsuarioUseCase(usuario);
-    await cargarUsuarios();
+    try {
+      await cargarUsuarios();
+    } catch (e) {
+      debugPrint('Error al recargar usuarios después del registro: $e');
+      // Se omite el throw para evitar romper la pantalla si falla la recarga
+    }
   }
 
-  Future<void> bloquearUsuario(int usuarioId) async {
-    await bloquearUsuarioUseCase(usuarioId);
+  Future<void> bloquearUsuario(int usuarioId, bool bloquear) async {
+    await bloquearUsuarioUseCase(usuarioId, bloquear);
     await cargarUsuarios();
   }
 

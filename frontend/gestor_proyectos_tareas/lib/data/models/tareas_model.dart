@@ -64,4 +64,5 @@ class TareaModel extends Tarea {
     'asignado_a': asignadoA,
     'creado_por': creadoPor,
   };
+
 }

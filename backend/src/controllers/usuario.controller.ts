@@ -41,7 +41,6 @@ export const cambiarEstadoBloqueo = async (req: Request, res: Response) => {
     res.status(400).json({ message: 'El estado debe ser un booleano (true o false)' });
     return;
   }
-  
   try {
     
     const result = await usuarioRepo.bloquearUsuario(Number(id), estado);

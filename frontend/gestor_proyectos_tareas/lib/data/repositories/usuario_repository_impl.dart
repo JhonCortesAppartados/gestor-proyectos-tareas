@@ -16,14 +16,14 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
 
 
   @override
-  Future<void> bloquearUsuario(int usuarioId) async{
+  Future<void> bloquearUsuario(int usuarioId, bool bloquear) async{
     final response = await http.patch(
-      Uri.parse('$baseUrl/usuarios/$usuarioId/bloquear'),
+      Uri.parse('$baseUrl/usuarios/$usuarioId/bloqueo'),
       headers: {
         'Content-Type': 'application/json',
         if(authProvider?.jwtToken != null) 'Authorization' : 'Bearer ${authProvider!.jwtToken}',
       },
-      body: jsonEncode({'esta_bloqueado': true}),
+      body: jsonEncode({'estado': bloquear}),
     );
 
     if(response.statusCode != 200) {
@@ -34,12 +34,13 @@ class UsuarioRepositoryImpl implements UsuarioRepository {
   @override
   Future<Usuario> crearUsuario(Usuario usuario) async{
     final response = await http.post(
-      Uri.parse('$baseUrl/usuarios'),
+      Uri.parse('$baseUrl/auth/register'),
       headers: {'Content-Type': 'application/json'},
       body: jsonEncode((usuario as UsuarioModel).toJson()),
     );
-    if(response.statusCode == 200){
-      return UsuarioModel.fromJson(jsonDecode(response.body));
+    if(response.statusCode == 201){
+      final data = jsonDecode(response.body);
+      return UsuarioModel.fromJson(data['usuario']);
     }
     throw Exception('Error al crear el usuario');
   }
