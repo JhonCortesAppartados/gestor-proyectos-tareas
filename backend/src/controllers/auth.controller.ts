@@ -19,18 +19,23 @@ export const loginUsuario = async (req: Request, res: Response) => {
     
     //Validaciones que se hacen con la información que se recibe.
     try {
+        //Verificación del correo validando si es correcto el correo ingresado.
         const usuario = await usuarioRepo.findByCorreo(correo);
         if(!usuario) {
             res.status(401).json({ message: "Credenciales inválidas" });
             return;
         }
 
+        //Verifica si el usuario está bloqueado, si esta bloqueado no puede iniciar sesión.
         if(usuario.esta_bloqueado) {
             res.status(403).json({ message: "Usuario bloqueado" });
             return;
         }
 
+        //Comparación de la contraseña ingresada, con la contraseña almacenada en la base de datos. 
         const passwordValido = await compare(password, usuario.password);
+
+        //Si la comparación no es válida, retorna la respuesta con 401.
         if(!passwordValido){
             res.status(401).json({ message: "Credenciales inválidas" });
             return;
